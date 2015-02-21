@@ -1,4 +1,4 @@
-odd2015
+Campaign Clarity
 ========
 Required Installation: 
 ----------------------
