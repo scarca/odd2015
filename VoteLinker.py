@@ -16,7 +16,7 @@ class VoteLinker:
 		return (checked, realMD5 == checked)
 	def createLeg():
 		pag = PagingService(congress) 
-		legislators = list(pag.legislators(limit=15000, all_legislators='true'))
+		legislators = list(pag.legislators(limit=30000, all_legislators='true'))
 		string = json.dumps(legislators)
 		f = open('legislatorsList', 'w')
 		f.write(string)
