@@ -6,6 +6,7 @@ import json
 CARRYON_FILE = "transfer.txt"
 class VoteLinker:
 	def checkMD5(fd):
+		print("Checking MD5SUM")
 		realMD5 = open('checksum.md5', 'r').readline()[:-1]
 		checksum = md5()
 		#generating CheckSum
@@ -15,8 +16,10 @@ class VoteLinker:
 		checked = checksum.hexdigest()
 		return (checked, realMD5 == checked)
 	def createLeg():
+		print("Recreating Ledger")
 		pag = PagingService(congress) 
 		legislators = list(pag.legislators(limit=30000, all_legislators='true'))
+		print("Creating Bits and Bytes")
 		string = json.dumps(legislators)
 		f = open('legislatorsList', 'w')
 		f.write(string)
@@ -24,6 +27,7 @@ class VoteLinker:
 		del legislators
 		del string
 		#create MD5Sum
+		print("Recreating MD5Sum")
 		(checksum, trash) = VoteLinker.checkMD5("legislatorsList")
 		f=open('checksum.md5', 'w')
 		f.write(checksum)
@@ -46,6 +50,7 @@ class VoteLinker:
 				return politician 
 	def determineParty(self, bd):
 		#returns dem-vote margin and r-vote margin 
+		print("Determining Party Margins")
 		blob = congress.votes(vote_type="passage", bill_id=bd, fields="breakdown")
 		try:
 			blob[0]['breakdown']['party']['R']['Yea'] += blob[1]['breakdown']['party']['R']['Yea']
@@ -75,18 +80,12 @@ class VoteLinker:
 		except IndexError:
 			pass
 		votes=blob[0]
-		number = 0; 
-		numberNQuery= 0;
 		for voter in votes['voter_ids']: 
-			number += 1
-			print(number, voter)
 			him= self.getValue("bioguide_id", voter)
 			#catch the weird case where someone isn't there??? 
 			if him == None: 
-				print("Querying this SOB")
+				print("Please regenerate the legislator index using the 'r' flag to prevent this from happenging agin. If this persists. please report following ID:",voter)
 				[him] = congress.legislators(all_legislators='true', bioguide_id=voter)
-			else:
-				numberNQuery +=1 
 			try:
 				if him['party'] == 'D': 
 					if votes['voter_ids'][voter] == 'Yea' and dMargin < 0:
@@ -101,6 +100,7 @@ class VoteLinker:
 				else:
 					pass
 			except TypeError:
+				print("Uh-oh. Something went wrong. Please report the following info.")
 				print(him)
 				print(congress.legislators(all_legislators='true', bioguide_id=voter))
 				print(voter)
@@ -130,11 +130,12 @@ if __name__ == "__main__":
 	def regenerate(): 
 		VoteLinker.createLeg()
 	def printUsage(): 
+		print("Meanings: \n voting = Look at partisian votes for specified bill. \n regenerate = update list of legislatures from the Sunlight Foundation's database.")
 		for k,v in opt.items(): 
 			if len(k) == 1: 
-				print("Flag: -"+k, v)
+				print("Flag: -"+k, ":", v)
 			else: 
-				print("Option: "+k, v)
+				print("Option: "+k,":", v)
 	if len(sys.argv) < 2:
 		printUsage()
 		exit(1)
