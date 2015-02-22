@@ -99,7 +99,7 @@ class VoteLinker:
 					if votes['voter_ids'][voter] == 'Nay' and rMargin> 0:
 						rVoters[self.getValue('bioguide_id', voter)['crp_id']] = bill_identifier
 				else:
-					print("Fuck you, too.")
+					pass
 			except TypeError:
 				print(him)
 				print(congress.legislators(all_legislators='true', bioguide_id=voter))
@@ -122,6 +122,7 @@ if __name__ == "__main__":
 		except ValueError: 
 			print("The Bill You Entered,", sys.argv[voteNumber+1],"Does Not Exist")
 			exit(2)
+		f = open(CARRYON_FILE, "w").close()
 		f = open(CARRYON_FILE, "w")
 		for d in votes: 
 			for k,v in d.items():
