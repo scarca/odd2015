@@ -3,7 +3,7 @@ from hashlib import md5
 from sunlight import congress 
 from sunlight.pagination import PagingService
 import json 
-
+CARRYON_FILE = "transfer.txt"
 class VoteLinker:
 	def checkMD5(fd):
 		realMD5 = open('checksum.md5', 'r').readline()[:-1]
@@ -107,8 +107,55 @@ class VoteLinker:
 				break
 		return (dVoters, rVoters)
 if __name__ == "__main__":
-	a = VoteLinker()
-	try:
-		print(a.getVotingRecord("hr3-83"))
-	except ValueError: 
-		print("The Bill You Entered Does Not Exist") 
+	import sys
+	opt = {"v": "voting", "--voting-records": "voting", "voting records": "voting", 
+		   "r": "regenerate", "--regenerate": "regenerate", "regenerate": "regenerate"
+		   }
+	def voting(voteNumber):
+		if len(sys.argv) < 3: 
+			printUsage()
+			exit(1)
+		a = VoteLinker()
+		votes =[]
+		try:
+			votes=(a.getVotingRecord(sys.argv[voteNumber+ 1]))
+		except ValueError: 
+			print("The Bill You Entered,", sys.argv[voteNumber+1],"Does Not Exist")
+			exit(2)
+		f = open(CARRYON_FILE, "w")
+		for d in votes: 
+			for k,v in d.items():
+				f.write(k+"\n")
+	def regenerate(): 
+		VoteLinker.createLeg()
+	def printUsage(): 
+		for k,v in opt.items(): 
+			if len(k) == 1: 
+				print("Flag: -"+k, v)
+			else: 
+				print("Option: "+k, v)
+	if len(sys.argv) < 2:
+		printUsage()
+		exit(1)
+	com = sys.argv[1]
+	if com[0] == "-" and not com[1] == "-":
+		for cmd in com[1:]:
+			if not cmd in opt: 
+				printUsage() 
+				exit(1)
+			if opt[cmd] == "voting":
+				voting(1)
+			elif opt[cmd] == "regenerate": 
+				regenerate()
+			else:
+				printUsage()
+	else:
+		for command in range(1,sys.argv):
+			if opt[sys.argv[command]] == "regenerate": 
+				regenerate()
+			elif opt[sys.argv[command]] == "voting": 
+				voting() 
+			else:
+				printUsage()
+				exit(1)
+		exit(0)
