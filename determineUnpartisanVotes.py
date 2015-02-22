@@ -47,6 +47,11 @@ class VoteLinker:
 	def determineParty(self, bd):
 		#returns dem-vote margin and r-vote margin 
 		blob = congress.votes(vote_type="passage", bill_id=bd, fields="breakdown")
+		blob[0]['breakdown']['party']['R']['Yea'] += blob[1]['breakdown']['party']['R']['Yea']
+		blob[0]['breakdown']['party']['R']['Nay'] += blob[1]['breakdown']['party']['R']['Nay']
+		blob[0]['breakdown']['party']['D']['Nay'] += blob[1]['breakdown']['party']['D']['Nay']
+		blob[0]['breakdown']['party']['D']['Yea'] += blob[1]['breakdown']['party']['D']['Yea']
+
 		party=blob[0]
 		rVotes = (party['breakdown']['party']['R']['Yea'] - party['breakdown']['party']['R']['Nay'])
 		dVotes = (party['breakdown']['party']['D']['Yea'] - party['breakdown']['party']['D']['Nay'])
@@ -58,6 +63,7 @@ class VoteLinker:
 		dVoters = {}; 
 		rVoters = {}; 
 		blob = congress.votes(vote_type="passage", bill_id=bill_identifier, fields="voter_ids")
+		blob[0].update(blob[1])
 		votes=blob[0]
 		number = 0; 
 		numberNQuery= 0;
