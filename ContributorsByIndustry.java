@@ -4,9 +4,7 @@ import java.io.FileNotFoundException;
 import java.text.*;
 import java.lang.Integer;
 import java.io.*;
-
 public class ContributersByIndustry {
-
 	public static int[] contributors(String s) {
 		List<String> allContributions = new ArrayList<String>();
 		List<String> CRPs = new ArrayList<String>();
@@ -14,86 +12,62 @@ public class ContributersByIndustry {
 		List<String> contribAmountStrings = new ArrayList<String>();
 		List<Integer> contribAmount = new ArrayList<Integer>();
 		List<Integer> myContribAmount = new ArrayList<Integer>();
-
 		File contribs = new File("src/AllContribs.csv");
 		File contribs2 = new File("src/ContributionsAmounts.csv");
-
 		try {
-
 			Scanner myScanner = new Scanner(contribs);
-
 			myScanner.useDelimiter(",");
-
 			boolean choose = true;
-
 			while (myScanner.hasNext()) {
 				if (choose == true) {
 					myScanner.next();
 					choose = false;
 				}
-
 				else {
 					allContributions.add(myScanner.nextLine());
 					choose = true;
 				}
 			}
-
+			myScanner.close();
 			Scanner myScanner2 = new Scanner(contribs);
-
 			myScanner2.useDelimiter(",");
-
 			boolean choose2 = true;
-
 			while (myScanner2.hasNext()) {
 				if (choose2 == true) {
 					CRPs.add(myScanner2.next());
 					choose2 = false;
 				}
-
 				else {
 					myScanner2.nextLine();
 					choose2 = true;
 				}
 			}
-
+			myScanner2.close();
 			CRPs.remove(0);
-
 			for (int r = 0; r < allContributions.size(); r++) {
 				allContributions.set(r, allContributions.get(r).substring(1));
 			}
-
 			allContributions.remove(0);
-
 			Scanner scan3 = new Scanner(contribs2);
-
 			while (scan3.hasNext()) {
 				contribAmountStrings.add(scan3.nextLine());
 			}
-
+			scan3.close();
 			contribAmountStrings.remove(0);
-
 			for (int l = 0; l < contribAmountStrings.size(); l++) {
-				contribAmount
-						.add(Integer.parseInt(contribAmountStrings.get(l)));
+				contribAmount.add(Integer.parseInt(contribAmountStrings.get(l)));
 			}
-
 			int i = 0;
-
 			while (i < CRPs.size()) {
 				if (CRPs.get(i).equals(s)) {
-
 					myContribs.add(allContributions.get(i));
 					myContribAmount.add(contribAmount.get(i));
 				}
-
 				i++;
-
 			}
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		int A = 0;
 		int B = 0;
 		int C = 0;
@@ -130,14 +104,11 @@ public class ContributersByIndustry {
 		int T = 0;
 		int X = 0;
 		int Y = 0;
-
 		int a = 0;
-
 		while (a < myContribs.size()) {
 			if (myContribs.get(a).startsWith("A")) {
 				A += contribAmount.get(a);
 			}
-
 			else if (myContribs.get(a).startsWith("B")) {
 				B += contribAmount.get(a);
 			} else if (myContribs.get(a).startsWith("C")) {
@@ -211,9 +182,7 @@ public class ContributersByIndustry {
 			}
 			a++;
 		}
-
 		int[] conts = new int[36];
-
 		conts[0] = A;
 		conts[1] = B;
 		conts[2] = C;
@@ -250,197 +219,142 @@ public class ContributersByIndustry {
 		conts[33] = X;
 		conts[34] = Y;
 		conts[35] = Z;
-
 		return conts;
 	}
-
 	public static void main(String[] args) {
-
 		// User enters the location of the sector codes file
 		// Scanner input = new Scanner(System.in);
 		// System.out.println("Enter sector codes location: ");
 		// System.out.println("---Example: \"src/Sector_Codes.csv\"---");
 		// String s = input.next();
 		File sectorCodes = new File("src/Sector_Codes.csv");
-
 		// Creates ArrayLists for the sector codes and their corresponding
 		// industries
 		List<String> codes = new ArrayList<String>();
 		List<String> industry = new ArrayList<String>();
-
 		// Adds sector codes and industries to their respective ArrayLists
 		try {
-
 			Scanner scan = new Scanner(sectorCodes);
-
 			scan.useDelimiter(",");
-
 			boolean pick = true;
-
 			while (scan.hasNext()) {
 				if (pick == true) {
 					codes.add(scan.next());
 					pick = false;
 				}
-
 				else {
 					industry.add(scan.next());
 					pick = true;
 				}
-
 			}
-
 			scan.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		// Removes the header in the CSV from both ArrayLists
 		codes.remove(0);
 		industry.remove(0);
-
 		// User enters the location of the CRP code file
 		// Scanner input2 = new Scanner(System.in);
 		// System.out.println("Enter CRP code location: ");
 		// System.out.println("---Example: \"src/CRPs_IDs.csv\"---");
 		// String s2 = input2.next();
 		File crp = new File("src/CRPs_IDs.csv");
-
 		// Creates ArrayLists for the CRP IDs and their corresponding
 		// congresspeople
 		List<String> IDs = new ArrayList<String>();
 		List<String> names = new ArrayList<String>();
-
 		// Adds CRP IDs and congresspeople to their respective ArrayLists
 		try {
-
 			Scanner scanner = new Scanner(crp);
-
 			scanner.useDelimiter(",   ");
-
 			boolean pick = true;
-
 			while (scanner.hasNext()) {
 				if (pick == true) {
 					IDs.add(scanner.next());
 					pick = false;
 				}
-
 				else {
 					names.add(scanner.nextLine());
 					pick = true;
 				}
-
 			}
-
 			scanner.close();
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		// Removes header from first element of the ID ArrayList
 		IDs.set(0, IDs.get(0).substring(12));
-
 		// Removes excess spaces and commas from each of the ArrayList elements
 		// in the name ArrayList
 		for (int i = 0; i < names.size(); i++) {
 			names.set(i, names.get(i).substring(5, names.get(i).length() - 1));
 		}
-
 		// User enters the location of the targeted congress people file
 		// Scanner input3 = new Scanner(System.in);
 		// System.out.println("Enter targeted congresspeople location: ");
 		// System.out.println("---Example: \"src/CongressPeopleCRP.csv\"---");
 		// String s3 = input3.next();
 		File CRP = new File("src/CongressPeopleCRP.csv");
-
 		// Creates an ArrayList to hold the CRP IDs of the targeted
 		// congresspeople
 		List<String> congressCRPs = new ArrayList<String>();
-
 		// Adds the CRP codes of the targeted congress people to the ArrayList
 		try {
-
 			Scanner scanner = new Scanner(CRP);
-
 			while (scanner.hasNext()) {
 				congressCRPs.add(scanner.next());
 			}
 		}
-
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		int i = 0;
 		int x = 0;
-
 		List<String> chosenPeople = new ArrayList<String>();
-
 		while (i < IDs.size() && x < congressCRPs.size()) {
 			if (IDs.get(i).equals(congressCRPs.get(x))) {
 				chosenPeople.add(names.get(i));
 				x += 1;
 				i = 0;
 			}
-
 			i++;
-
 		}
-
 		for (String z : chosenPeople) {
 			System.out.println(z);
 		}
-
 		int[][] conts = new int[congressCRPs.size()][36];
-
 		for (int h = 0; h < congressCRPs.size(); h++) {
 			for (int p = 0; p < 36; p++) {
 				conts[h][p] = ContributersByIndustry.contributors(congressCRPs
 						.get(h))[p];
 			}
 		}
-
 		int l = 0;
-
 		for (int t = 0; t < congressCRPs.size(); t++) {
 			for (int e = 0; e < 36; e++) {
-
 				System.out.print(industry.get(e) + ": ");
 				System.out.println(conts[t][e]);
 			}
 		}
-
 		try {
 			PrintWriter writer = new PrintWriter(
 					"src/CongresspeopleContribs.csv");
 			for (int t = 0; t < congressCRPs.size(); t++) {
-				
 				System.out.print("Sector, ");
-				
 				for (int e = 0; e < 36; e++) {
-
 					writer.print(industry.get(e) + ", ");
 				}
 				System.out.println();
-				
 				System.out.print("Contribution_Amount, ");
 				for (int e = 0; e < 36; e++) {
-
 					writer.print(conts[t][e] + ", ");
 				}
-				
 				System.out.println();
-				
 			}
-
 			writer.close();
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 }
