@@ -416,11 +416,23 @@ public class ContributersByIndustry {
 			PrintWriter writer = new PrintWriter(
 					"src/CongresspeopleContribs.csv");
 			for (int t = 0; t < congressCRPs.size(); t++) {
+				
+				System.out.print("Sector, ");
+				
 				for (int e = 0; e < 36; e++) {
 
 					writer.print(industry.get(e) + ", ");
-					writer.println(conts[t][e]);
 				}
+				System.out.println();
+				
+				System.out.print("Contribution_Amount, ");
+				for (int e = 0; e < 36; e++) {
+
+					writer.print(conts[t][e] + ", ");
+				}
+				
+				System.out.println();
+				
 			}
 
 			writer.close();
