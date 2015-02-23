@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.text.*;
 import java.lang.Integer;
 import java.io.*;
+
 public class ContributersByIndustry {
 	public static int[] contributors(String s) {
 		List<String> allContributions = new ArrayList<String>();
@@ -42,12 +43,12 @@ public class ContributersByIndustry {
 					choose2 = true;
 				}
 			}
-			myScanner2.close();
 			CRPs.remove(0);
 			for (int r = 0; r < allContributions.size(); r++) {
 				allContributions.set(r, allContributions.get(r).substring(1));
 			}
 			allContributions.remove(0);
+			myScanner2.close();
 			Scanner scan3 = new Scanner(contribs2);
 			while (scan3.hasNext()) {
 				contribAmountStrings.add(scan3.nextLine());
@@ -55,7 +56,8 @@ public class ContributersByIndustry {
 			scan3.close();
 			contribAmountStrings.remove(0);
 			for (int l = 0; l < contribAmountStrings.size(); l++) {
-				contribAmount.add(Integer.parseInt(contribAmountStrings.get(l)));
+				contribAmount
+						.add(Integer.parseInt(contribAmountStrings.get(l)));
 			}
 			int i = 0;
 			while (i < CRPs.size()) {
@@ -193,8 +195,8 @@ public class ContributersByIndustry {
 		conts[7] = H;
 		conts[8] = J11;
 		conts[9] = J12;
-		conts[10] = J21;
-		conts[11] = J22;
+		conts[11] = J21;
+		conts[10] = J22;
 		conts[12] = J51;
 		conts[13] = J52;
 		conts[14] = J61;
@@ -341,16 +343,16 @@ public class ContributersByIndustry {
 			PrintWriter writer = new PrintWriter(
 					"src/CongresspeopleContribs.csv");
 			for (int t = 0; t < congressCRPs.size(); t++) {
-				System.out.print("Sector, ");
+				writer.print("Sector, ");
 				for (int e = 0; e < 36; e++) {
 					writer.print(industry.get(e) + ", ");
 				}
-				System.out.println();
-				System.out.print("Contribution_Amount, ");
+				writer.println();
+				writer.print("Contribution_Amount, ");
 				for (int e = 0; e < 36; e++) {
 					writer.print(conts[t][e] + ", ");
 				}
-				System.out.println();
+				writer.println();
 			}
 			writer.close();
 		} catch (FileNotFoundException e) {
