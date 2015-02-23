@@ -12,11 +12,19 @@ sunlight.config.API_KEY = apikey
 keywordspoint = 'https://congress.api.sunlightfoundation.com/'
 
 
+def billFinder(keyword, party):
+	#connects to the sunlight foundation API and finds the bill keywords
+	 
+
+
+
+
 def keyWordMaker(sector):
 	#This takes three top sectors and creates three arrays of keywords
 	#um no switch statements in python.... so i'll just use multiple if-else
 	if sector === "Energy":
-		file = open(keyWords_Energy.txt)
+		file = open(keywords_energy.txt, 'r')
+	if sector === "Agribusiness"
 		
 	
 
