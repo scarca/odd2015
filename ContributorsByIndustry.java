@@ -342,12 +342,12 @@ public class ContributersByIndustry {
 		try {
 			PrintWriter writer = new PrintWriter(
 					"src/CongresspeopleContribs.csv");
+			writer.print("Sector, ");
+			for (int e = 0; e < 36; e++) {
+				writer.print(industry.get(e) + ", ");
+			}
+			writer.println();
 			for (int t = 0; t < congressCRPs.size(); t++) {
-				writer.print("Sector, ");
-				for (int e = 0; e < 36; e++) {
-					writer.print(industry.get(e) + ", ");
-				}
-				writer.println();
 				writer.print("Contribution_Amount, ");
 				for (int e = 0; e < 36; e++) {
 					writer.print(conts[t][e] + ", ");
