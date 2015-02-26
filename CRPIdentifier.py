@@ -1,15 +1,6 @@
-import requests
 import csv
 import json
 
-from sunlight import congress
-from sys import argv
-
-script, sector1, sector2, sector3 = argv
-
-apikey = a07d09d6d82b4d9985b29f79c123aaec
-sunlight.config.API_KEY = apikey
-keywordspoint = 'https://congress.api.sunlightfoundation.com/'
 
 
 
@@ -38,17 +29,7 @@ This function will also allow for parameters of last added, and _____ (add this 
 also, reminder to myself to add raj's code in here in the morning.
 
 
-
-
 '''
-
-
-def billFinder(keyword, party):
-	#connects to the sunlight foundation API and finds the bill keywords
-
-
-
-
 
 def keyWordMaker(sector):
 	#This takes three top sectors and creates three arrays of keywords
@@ -57,3 +38,8 @@ def keyWordMaker(sector):
 	jsonfile = open("keywords.json", "r")
 	kw = json.load(jsonfile)
 	#do whatever here spencer
+	#access each
+	for key, value in kw.items():
+		print(key, value)
+
+keyWordMaker("a")
