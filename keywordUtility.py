@@ -3,7 +3,10 @@ import json
 class keywordUtility:
     '''a VERY thin wrapper around JSON's stored in files.
 
-    Provides an interface to add, remove, modify, etc keywords from a json'''
+    Provides an interface to add, remove, modify, etc keywords from a json. 
+    To use this, you MUST MUST MUST call the finish() function. If you do not call the finish function your changes will be lost. 
+    As I said earlier, this is a VERY VERY VERY thin wrapper. 
+    '''
     def __init__(self, **kwargs):
         '''you MUST provide a key "filename=something" in kwargs.'''
         self.args = kwargs
