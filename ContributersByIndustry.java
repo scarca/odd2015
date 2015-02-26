@@ -16,42 +16,41 @@ public class ContributersByIndustry implements Runnable{
 	private static List<String> chosenPeople = new ArrayList<String>();
 	private static List<String> codes = new ArrayList<String>();
 	private static List<String> industry = new ArrayList<String>();
-	
+
 	public void run() {
-				// User enters the location of the sector codes file
-				File sectorCodes = new File("src/Sector_Codes.csv");
-				// Adds sector codes and industries to their respective ArrayLists
-				try {
-					Scanner scan = new Scanner(sectorCodes);
-					scan.useDelimiter(",");
-					boolean pick = true;
-					while (scan.hasNext()) {
-						if (pick == true) {
-							codes.add(scan.next());
-							pick = false;
-						}
-						else {
-							industry.add(scan.next());
-							pick = true;
-						}
-					}
-					scan.close();
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+		// User enters the location of the sector codes file
+		File sectorCodes = new File("src/Sector_Codes.csv");
+		// Adds sector codes and industries to their respective ArrayLists
+		try {
+			Scanner scan = new Scanner(sectorCodes);
+			scan.useDelimiter(",");
+			boolean pick = true;
+			while (scan.hasNext()) {
+				if (pick == true) {
+					codes.add(scan.next());
+					pick = false;
 				}
-				// Removes the header in the CSV from both ArrayLists
-				codes.remove(0);
-				industry.remove(0);
+				else {
+					industry.add(scan.next());
+					pick = true;
+				}
+			}
+			scan.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		// Removes the header in the CSV from both ArrayLists
+		codes.remove(0);
+		industry.remove(0);
 	}
-	
+
 	public static int[] contributors(String s) {
 		myContribs.clear();
 		myContribAmount.clear();
 		File contribs = new File("src/AllContribs.csv");
 		File contribs2 = new File("src/ContributionsAmounts.csv");
 		try {
-			if(allContributions.isEmpty())
-			{
+			if(allContributions.isEmpty()){
 				Scanner myScanner = new Scanner(contribs);
 				myScanner.useDelimiter(",");
 				boolean choose = true;
@@ -114,7 +113,7 @@ public class ContributersByIndustry implements Runnable{
 					}
 					i++;
 				}
-			
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -248,7 +247,7 @@ public class ContributersByIndustry implements Runnable{
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 		//Adds the names of the chosen congresspeople CRPs to an ArrayList
 		int i = 0;
 		int x = 0;
@@ -264,7 +263,7 @@ public class ContributersByIndustry implements Runnable{
 		for (String z : chosenPeople) {
 			System.out.println(z);
 		}
-		/*Adds the contribution amount by industry for the previously selected congresspeople to a 
+		/*Adds the contribution amount by industry for the previously selected congresspeople to a
 		two-dimensional array by repeatedly calling the method defined prior to the main method*/
 		int[][] conts = new int[congressCRPs.size()][36];
 		for (int h = 0; h < congressCRPs.size(); h++) {
