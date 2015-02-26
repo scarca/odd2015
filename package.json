@@ -1,0 +1,19 @@
+{
+  "name": "CampaignClarity",
+  "version": "0.1.0",
+  "description": "Bring clarity to the campaign system ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scarca/odd2015.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scarca/odd2015/issues"
+  },
+  "homepage": "https://github.com/scarca/odd2015"
+}
