@@ -14,8 +14,8 @@ keywordspoint = 'https://congress.api.sunlightfoundation.com/'
 
 
 '''
-okay, this is pseudo code before I write actually my code. 
-Goal: 
+okay, this is pseudo code before I write actually my code.
+Goal:
 1st, find the sectors that x candidate received most money from.
 2nd, find the bills that closely relate to those sectors.
 
@@ -43,14 +43,9 @@ also, reminder to myself to add raj's code in here in the morning.
 '''
 
 
-
-
-
-
-
 def billFinder(keyword, party):
 	#connects to the sunlight foundation API and finds the bill keywords
-	 
+
 
 
 
@@ -58,9 +53,7 @@ def billFinder(keyword, party):
 def keyWordMaker(sector):
 	#This takes three top sectors and creates three arrays of keywords
 	#um no switch statements in python.... so i'll just use multiple if-else
-	if sector === "Energy":
-		file = open(keywords_energy.txt, 'r')
-	if sector === "Agribusiness"
-		
-	
-
+	#Open up json
+	jsonfile = open("keywords.json", "r")
+	kw = json.load(jsonfile)
+	#do whatever here spencer
