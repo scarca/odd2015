@@ -12,5 +12,7 @@
     "communication": ["communications", "electronics"],
     "israel": ["israel"],
     "repleadership": ["republican", "leadership"],
-    "conideology": ["conservative", "ideology"]
+    "conideology": ["conservative", "ideology”],
+    “health”: [“health”, “insurance”],
+    
 }
