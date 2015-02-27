@@ -26,7 +26,7 @@ def keyWordMaker(sector, chamber):
 		enactionHistory = "history.senate_passage_result"
 	else:
 		print "error: the chamber input did not exist"
-	bill_list = list(pag.congress.search_bills(keywords=sector, chamber = chamber, enactionHistory = "pass", fields=official_title, summary, bill.id, limit = 1000000))
+	bill_list = list(pag.congress.search_bills(keywords=sector, chamber = chamber, enactionHistory = "pass", fields="official_title, summary, bill_id", limit = 1000000))
 	print (bill_list)
 
 if __name__ == "__main__":
