@@ -1,3 +1,5 @@
 *.class
 *.log
+transfer.txt
+CongresspeopleContribs.csv
 .DS_Store
