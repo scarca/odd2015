@@ -62,6 +62,7 @@ class VoteLinker:
 		'''Determine party margins for each party'''
 		#returns dem-vote margin and r-vote margin
 		print("Determining Party Margins")
+		#literally just a placeholder. This gets the passed version of the bill and the breakdown of what party voted where
 		blob = congress.votes(vote_type="passage", bill_id=bd, fields="breakdown")
 		try:
 			blob[0]['breakdown']['party']['R']['Yea'] += blob[1]['breakdown']['party']['R']['Yea']
@@ -112,7 +113,7 @@ class VoteLinker:
 						rVoters[self.getValue('bioguide_id', voter)['crp_id']] = bill_identifier
 				else:
 					pass
-			except TypeError:
+			except TypeError: #Redundancy. Should never actually occur 
 				print("Uh-oh. Something went wrong. Please report the following info.")
 				print(him)
 				print(congress.legislators(all_legislators='true', bioguide_id=voter))
