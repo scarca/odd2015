@@ -11,11 +11,17 @@ router.get('/', function(req, res, next) {
 router.get('/vlink', function(req, res, next){
     var bill = u.parse(req.url, true).query.bill
     handler.startPy(['VoteLinker.py', '-v', bill], function(code){
-        handler.startJava(['ContributersByIndustry'],function(code){
-            reader.go('/Users/eagle/Documents/Projects/odd2015/src/CongresspeopleContribs.csv', function(data){
-                res.render('vlink', {arr: data} )
+        if(code == 2){
+            arr = [['Error: ', "Bill does not exist"]]
+            res.render('vlink')
+        }
+        else{
+            handler.startJava(['ContributersByIndustry'],function(code){
+                reader.go('/Users/eagle/Documents/Projects/odd2015/src/CongresspeopleContribs.csv', function(data){
+                    res.render('vlink', {arr: data} )
+                })
             })
-        })
+        }
     })
 });
 module.exports = router;
