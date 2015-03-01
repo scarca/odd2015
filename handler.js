@@ -18,12 +18,14 @@ handler.startPy = function(commands, callback){
 handler.startJava = function(commands, callback){
     /* provide path please*/
     var ja = cp.spawn("java", commands)
-    ja.stdout.on('data', handleJava(data))
+    ja.stdout.on('data', function(data){
+        //Don't need to do anything here.
+    })
     ja.stderr.on('data', function(data){
-        console.log("ERROR: ", data)
+        console.log("ERROR: ", data.toString())
     })
     ja.on('close', function(code){
-        callback(close)
+        callback(code)
     })
 }
 

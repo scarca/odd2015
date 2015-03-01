@@ -50,9 +50,9 @@ public class ContributersByIndustry implements Runnable {
 		myContribs.clear();
 		myContribAmount.clear();
 		// Location of file containing all contributions
-		File contribs = new File("src/src/AllContribs.csv");
+		File contribs = new File("src/AllContribs.csv");
 		// Location of file containing all contribution amounts
-		File contribs2 = new File("src/src/ContributionsAmounts.csv");
+		File contribs2 = new File("src/ContributionsAmounts.csv");
 		try {
 
 			if (allContributions.isEmpty()) {
@@ -229,7 +229,7 @@ public class ContributersByIndustry implements Runnable {
 	public static void main(String[] args) {
 		(new Thread(new ContributersByIndustry())).start();
 		// User enters the location of the CRP code file
-		File crp = new File("src/src/CRPs_IDs.csv");
+		File crp = new File("src/CRPs_IDs.csv");
 		// Adds CRP IDs and congresspeople to their respective ArrayLists
 		try {
 			Scanner scanner = new Scanner(crp);
@@ -256,7 +256,7 @@ public class ContributersByIndustry implements Runnable {
 			names.set(i, names.get(i).substring(5, names.get(i).length() - 1));
 		}
 		// User enters the location of the targeted congress people file
-		File CRP = new File("src/transfer.txt");
+		File CRP = new File("transfer.txt");
 
 		// Adds the CRP codes of the targeted congress people to the ArrayList
 		try {
