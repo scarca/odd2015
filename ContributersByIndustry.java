@@ -11,12 +11,10 @@ public class ContributersByIndustry implements Runnable {
 	private static List<String> contribAmountStrings = new ArrayList<String>();
 	private static List<Integer> contribAmount = new ArrayList<Integer>();
 	private static List<Integer> myContribAmount = new ArrayList<Integer>();
-	private static List<String> IDs = new ArrayList<String>();
-	private static List<String> names = new ArrayList<String>();
 	private static List<String> congressCRPs = new ArrayList<String>();
 	private static List<String> chosenPeople = new ArrayList<String>();
-	private static List<String> codes = new ArrayList<String>();
-	private static List<String> industry = new ArrayList<String>();
+	private static HashMap<String, String> industryAndCodes = new HashMap<>();
+	private static HashMap<String, String> crpsAndNames = new HashMap<>();
 
 	public void run() {
 		// User enters the location of the sector codes file
@@ -24,25 +22,27 @@ public class ContributersByIndustry implements Runnable {
 		// Adds sector codes and industries to their respective ArrayLists
 		try {
 			Scanner scan = new Scanner(sectorCodes);
+			Scanner scan2 = new Scanner(sectorCodes);
+			scan2.useDelimiter(",");
+			String abc = scan2.next();
 			scan.useDelimiter(",");
 			boolean pick = true;
-			while (scan.hasNext()) {
+			while (scan.hasNext() && scan2.hasNext()) {
 				if (pick == true) {
-					codes.add(scan.next());
+					industryAndCodes.put(scan.next(), scan2.next());
 					pick = false;
 				}
 				else {
-					industry.add(scan.next());
+					abc = scan.next();
+					String abc2 = scan2.next();
 					pick = true;
 				}
 			}
 			scan.close();
+			scan2.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		// Removes the header in the CSV from both ArrayLists
-		codes.remove(0);
-		industry.remove(0);
 	}
 
 	public static int[] contributors(String s) {
@@ -143,84 +143,82 @@ public class ContributersByIndustry implements Runnable {
 			e.printStackTrace();
 		}
 		//Adds up the total contributions in dollars by sector to the chosen candidates
-		int[] conts = new int[36];
+		int[] conts = new int[35];
 		for (int i : conts) {
 			conts[i] = 0;
 		}
 		int a = 0;
 		while (a < myContribs.size()) {
 			if (myContribs.get(a).startsWith("A")) {
-				conts[0] += myContribAmount.get(a);
+				conts[0] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("B")) {
-				conts[1] += myContribAmount.get(a);
+				conts[1] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("C")) {
-				conts[2] += myContribAmount.get(a);
+				conts[2] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("D")) {
-				conts[3] += myContribAmount.get(a);
+				conts[3] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("E")) {
-				conts[4] += myContribAmount.get(a);
+				conts[4] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("F")) {
-				conts[5] += myContribAmount.get(a);
+				conts[5] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("G")) {
-				conts[6] += myContribAmount.get(a);
+				conts[6] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("H")) {
-				conts[7] += myContribAmount.get(a);
+				conts[7] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J11")) {
-				conts[8] += myContribAmount.get(a);
+				conts[8] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J12")) {
-				conts[9] += myContribAmount.get(a);
-			} else if (myContribs.get(a).startsWith("J22")) {
-				conts[10] += myContribAmount.get(a);
+				conts[9] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J21")) {
-				conts[11] += myContribAmount.get(a);
+				conts[10] += Math.abs(myContribAmount.get(a));
+			} else if (myContribs.get(a).startsWith("J22")) {
+				conts[11] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J51")) {
-				conts[12] += myContribAmount.get(a);
+				conts[12] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J52")) {
-				conts[13] += myContribAmount.get(a);
+				conts[13] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J61")) {
-				conts[14] += myContribAmount.get(a);
+				conts[14] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J62")) {
-				conts[15] += myContribAmount.get(a);
+				conts[15] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J712")) {
-				conts[16] += myContribAmount.get(a);
+				conts[16] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J715")) {
-				conts[17] += myContribAmount.get(a);
+				conts[17] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J72")) {
-				conts[18] += myContribAmount.get(a);
+				conts[18] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J73")) {
-				conts[19] += myContribAmount.get(a);
+				conts[19] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J74")) {
-				conts[20] += myContribAmount.get(a);
+				conts[20] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J75")) {
-				conts[21] += myContribAmount.get(a);
+				conts[21] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J8")) {
-				conts[22] += myContribAmount.get(a);
+				conts[22] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("JD1")) {
-				conts[23] += myContribAmount.get(a);
+				conts[23] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("JD2")) {
-				conts[24] += myContribAmount.get(a);
+				conts[24] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("JE3")) {
-				conts[25] += myContribAmount.get(a);
+				conts[25] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("JH1")) {
-				conts[26] += myContribAmount.get(a);
-			} else if (myContribs.get(a).startsWith("Z")) {
-				conts[27] += myContribAmount.get(a);
-			} else if (myContribs.get(a).startsWith("L")) {
-				conts[28] += myContribAmount.get(a);
-			} else if (myContribs.get(a).startsWith("K12")) {
-				conts[29] += myContribAmount.get(a);
+				conts[26] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("K0")) {
-				conts[30] += myContribAmount.get(a);
+				conts[27] += Math.abs(myContribAmount.get(a));
+			} else if (myContribs.get(a).startsWith("K12")) {
+				conts[28] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("K2")) {
-				conts[31] += myContribAmount.get(a);
+				conts[29] += Math.abs(myContribAmount.get(a));
+			} else if (myContribs.get(a).startsWith("L")) {
+				conts[30] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("M")) {
-				conts[32] += myContribAmount.get(a);
+				conts[31] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("T")) {
-				conts[33] += myContribAmount.get(a);
+				conts[32] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("X")) {
-				conts[34] += myContribAmount.get(a);
+				conts[33] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("Y")) {
-				conts[35] += myContribAmount.get(a);
+				conts[34] += Math.abs(myContribAmount.get(a));
 			}
 			a++;
 		}
@@ -233,29 +231,34 @@ public class ContributersByIndustry implements Runnable {
 		// Adds CRP IDs and congresspeople to their respective ArrayLists
 		try {
 			Scanner scanner = new Scanner(crp);
-			scanner.useDelimiter(",   ");
+			Scanner scanner2 = new Scanner(crp);
+			scanner.useDelimiter(",");
+			scanner2.useDelimiter(",");
+			scanner2.next();
 			boolean pick = true;
-			while (scanner.hasNext()) {
+			while (scanner.hasNext() && scanner2.hasNext()) {
 				if (pick == true) {
-					IDs.add(scanner.next());
+					crpsAndNames.put(scanner.next(), scanner2.nextLine());
 					pick = false;
 				} else {
-					names.add(scanner.nextLine());
+					String meh = scanner.nextLine();
+					String otherMeh = scanner2.next();
 					pick = true;
 				}
 			}
 			scanner.close();
+			scanner2.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		// Removes header from first element of the ID ArrayList
-		IDs.set(0, IDs.get(0).substring(12));
 		// Removes excess spaces and commas from each of the ArrayList elements
 		// in the name ArrayList
-		for (int i = 0; i < names.size(); i++) {
-			names.set(i, names.get(i).substring(5, names.get(i).length() - 1));
+		for(Map.Entry<String, String> entry : crpsAndNames.entrySet())
+		{
+			crpsAndNames.put(entry.getKey(), entry.getValue().substring(1));
 		}
 		// User enters the location of the targeted congress people file
+
 
 		// Adds the CRP codes of the targeted congress people to the ArrayList
 		try {
@@ -271,12 +274,14 @@ public class ContributersByIndustry implements Runnable {
 		//Adds the names of the chosen congresspeople CRPs to an ArrayList
 
 		int i = 0;
-		int x = 0;
-		while (i < IDs.size() && x < congressCRPs.size()) {
-			if (IDs.get(i).equals(congressCRPs.get(x))) {
-				chosenPeople.add(names.get(i));
-				x += 1;
-				i = 0;
+		while(i < congressCRPs.size())
+		{
+			for(Map.Entry<String, String> entry : crpsAndNames.entrySet())
+			{
+				if(entry.getKey().equals(congressCRPs.get(i)))
+				{
+					chosenPeople.add(entry.getValue());
+				}
 			}
 			i++;
 		}
@@ -292,19 +297,17 @@ public class ContributersByIndustry implements Runnable {
 		 */
 		int[][] conts = new int[congressCRPs.size()][36];
 		for (int h = 0; h < congressCRPs.size(); h++) {
-			for (int p = 0; p < 36; p++) {
+			for (int p = 0; p < 35; p++) {
 				conts[h][p] = ContributersByIndustry.contributors(congressCRPs
 						.get(h))[p];
 			}
 		}
+		System.out.println(industryAndCodes);
+		ArrayList<String> set = new ArrayList(industryAndCodes.keySet());
+		Collections.sort(set);
+		System.out.println(set);
 		// Prints out contribution amounts by industry for each of the selected
 		// congresspeople
-		for (int t = 0; t < congressCRPs.size(); t++) {
-			for (int e = 0; e < 36; e++) {
-				//System.err.print(industry.get(e) + ": ");
-				//System.err.println(conts[t][e]);
-			}
-		}
 		// Writes the contribution by industry data to a csv file
 		try {
 			System.out.print("Sector, ");
@@ -316,6 +319,13 @@ public class ContributersByIndustry implements Runnable {
 				System.out.print(chosenPeople.get(t).replace(",", " ") + ",");
 				for (int e = 0; e < 36; e++) {
 					System.out.print(conts[t][e] + ", ");
+/*=======
+				writer.print(chosenPeople.get(t).substring(chosenPeople.get(t).indexOf(",") + 2) +
+						" " + chosenPeople.get(t).substring(0, chosenPeople.get(t).indexOf(","))  +
+						",");
+				for (int e = 0; e < 35; e++) {
+					writer.print(conts[t][e] + ", ");
+>>>>>>> origin/master I'm not sure what to delete and what not to delete  */
 				}
 				System.out.println();
 			}
