@@ -316,7 +316,7 @@ public class ContributersByIndustry implements Runnable {
 			}
 			writer.println();
 			for (int t = 0; t < congressCRPs.size(); t++) {
-				writer.print("Contribution_Amount, ");
+				writer.print(chosenPeople.get(t).replace(",", " ") + ",");
 				for (int e = 0; e < 36; e++) {
 					writer.print(conts[t][e] + ", ");
 				}
