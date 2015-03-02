@@ -150,75 +150,75 @@ public class ContributersByIndustry implements Runnable {
 		int a = 0;
 		while (a < myContribs.size()) {
 			if (myContribs.get(a).startsWith("A")) {
-				conts[0] += myContribAmount.get(a);
+				conts[0] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("B")) {
-				conts[1] += myContribAmount.get(a);
+				conts[1] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("C")) {
-				conts[2] += myContribAmount.get(a);
+				conts[2] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("D")) {
-				conts[3] += myContribAmount.get(a);
+				conts[3] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("E")) {
-				conts[4] += myContribAmount.get(a);
+				conts[4] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("F")) {
-				conts[5] += myContribAmount.get(a);
+				conts[5] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("G")) {
-				conts[6] += myContribAmount.get(a);
+				conts[6] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("H")) {
-				conts[7] += myContribAmount.get(a);
+				conts[7] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J11")) {
-				conts[8] += myContribAmount.get(a);
+				conts[8] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J12")) {
-				conts[9] += myContribAmount.get(a);
+				conts[9] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J21")) {
-				conts[10] += myContribAmount.get(a);
+				conts[10] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J22")) {
-				conts[11] += myContribAmount.get(a);
+				conts[11] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J51")) {
-				conts[12] += myContribAmount.get(a);
+				conts[12] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J52")) {
-				conts[13] += myContribAmount.get(a);
+				conts[13] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J61")) {
-				conts[14] += myContribAmount.get(a);
+				conts[14] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J62")) {
-				conts[15] += myContribAmount.get(a);
+				conts[15] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J712")) {
-				conts[16] += myContribAmount.get(a);
+				conts[16] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J715")) {
-				conts[17] += myContribAmount.get(a);
+				conts[17] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J72")) {
-				conts[18] += myContribAmount.get(a);
+				conts[18] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J73")) {
-				conts[19] += myContribAmount.get(a);
+				conts[19] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J74")) {
-				conts[20] += myContribAmount.get(a);
+				conts[20] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J75")) {
-				conts[21] += myContribAmount.get(a);
+				conts[21] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("J8")) {
-				conts[22] += myContribAmount.get(a);
+				conts[22] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("JD1")) {
-				conts[23] += myContribAmount.get(a);
+				conts[23] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("JD2")) {
-				conts[24] += myContribAmount.get(a);
+				conts[24] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("JE3")) {
-				conts[25] += myContribAmount.get(a);
+				conts[25] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("JH1")) {
-				conts[26] += myContribAmount.get(a);
+				conts[26] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("K0")) {
-				conts[27] += myContribAmount.get(a);
+				conts[27] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("K12")) {
-				conts[28] += myContribAmount.get(a);
+				conts[28] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("K2")) {
-				conts[29] += myContribAmount.get(a);
+				conts[29] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("L")) {
-				conts[30] += myContribAmount.get(a);
+				conts[30] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("M")) {
-				conts[31] += myContribAmount.get(a);
+				conts[31] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("T")) {
-				conts[32] += myContribAmount.get(a);
+				conts[32] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("X")) {
-				conts[33] += myContribAmount.get(a);
+				conts[33] += Math.abs(myContribAmount.get(a));
 			} else if (myContribs.get(a).startsWith("Y")) {
-				conts[34] += myContribAmount.get(a);
+				conts[34] += Math.abs(myContribAmount.get(a));
 			}
 			a++;
 		}
@@ -324,7 +324,9 @@ public class ContributersByIndustry implements Runnable {
 			}
 			writer.println();
 			for (int t = 0; t < congressCRPs.size(); t++) {
-				writer.print(chosenPeople.get(t).replace(",", " ") + ",");
+				writer.print(chosenPeople.get(t).substring(chosenPeople.get(t).indexOf(",") + 2) +
+						" " + chosenPeople.get(t).substring(0, chosenPeople.get(t).indexOf(","))  + 
+						",");
 				for (int e = 0; e < 35; e++) {
 					writer.print(conts[t][e] + ", ");
 				}
