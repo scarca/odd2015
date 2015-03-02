@@ -256,16 +256,15 @@ public class ContributersByIndustry implements Runnable {
 			names.set(i, names.get(i).substring(5, names.get(i).length() - 1));
 		}
 		// User enters the location of the targeted congress people file
-		File CRP = new File("transfer.txt");
 
 		// Adds the CRP codes of the targeted congress people to the ArrayList
 		try {
-			Scanner scanner = new Scanner(CRP);
+			Scanner scanner = new Scanner(System.in);
 			while (scanner.hasNext()) {
 				congressCRPs.add(scanner.next());
 			}
 			scanner.close();
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -283,7 +282,7 @@ public class ContributersByIndustry implements Runnable {
 		}
 		// Prints out the names of the chosen congresspeople
 		for (String z : chosenPeople) {
-			System.out.println(z);
+			System.err.println(z);
 		}
 
 		/*
@@ -302,28 +301,26 @@ public class ContributersByIndustry implements Runnable {
 		// congresspeople
 		for (int t = 0; t < congressCRPs.size(); t++) {
 			for (int e = 0; e < 36; e++) {
-				System.out.print(industry.get(e) + ": ");
-				System.out.println(conts[t][e]);
+				//System.err.print(industry.get(e) + ": ");
+				//System.err.println(conts[t][e]);
 			}
 		}
 		// Writes the contribution by industry data to a csv file
 		try {
-			PrintWriter writer = new PrintWriter(
-					"src/CongresspeopleContribs.csv");
-			writer.print("Sector, ");
+			System.out.print("Sector, ");
 			for (int e = 0; e < 36; e++) {
-				writer.print(industry.get(e) + ", ");
+				System.out.print(industry.get(e) + ", ");
 			}
-			writer.println();
+			System.out.println();
 			for (int t = 0; t < congressCRPs.size(); t++) {
-				writer.print(chosenPeople.get(t).replace(",", " ") + ",");
+				System.out.print(chosenPeople.get(t).replace(",", " ") + ",");
 				for (int e = 0; e < 36; e++) {
-					writer.print(conts[t][e] + ", ");
+					System.out.print(conts[t][e] + ", ");
 				}
-				writer.println();
+				System.out.println();
 			}
-			writer.close();
-		} catch (FileNotFoundException e) {
+			System.out.close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

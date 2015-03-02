@@ -1,5 +1,6 @@
 var express = require('express');
 var u = require('url')
+var csv = require('csv')
 var reader = require('../reader')
 var handler = require('../handler')
 var router = express.Router();
@@ -10,15 +11,14 @@ router.get('/', function(req, res, next) {
 });
 router.get('/vlink', function(req, res, next){
     var bill = u.parse(req.url, true).query.bill
-    handler.startPy(['VoteLinker.py', '-v', bill], function(code){
+    handler.startPy([['VoteLinker.py', '-v', bill]], function(code, data){
         if(code == 2){
             arr = [['Error: ', "Bill does not exist"]]
             res.render('vlink')
-        }
-        else{
-            handler.startJava(['ContributersByIndustry'],function(code){
-                reader.go('/Users/eagle/Documents/Projects/odd2015/src/CongresspeopleContribs.csv', function(data){
-                    res.render('vlink', {arr: data} )
+        }else{
+            handler.startJava([['ContributersByIndustry'], data],function(code, output){
+                csv.parse(output, {delimiter: ","}, function(err, done){
+                    res.render('vlink', {arr: done} )
                 })
             })
         }
