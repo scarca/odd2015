@@ -312,7 +312,7 @@ public class ContributersByIndustry implements Runnable {
 		try {
 			System.out.print("Sector, ");
 			for (int e = 0; e < 36; e++) {
-				System.out.print(industry.get(e) + ", ");
+				System.out.print(industryAndCodes.get(set.get(e)) + ", ");
 			}
 			System.out.println();
 			for (int t = 0; t < congressCRPs.size(); t++) {
