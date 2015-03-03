@@ -316,16 +316,11 @@ public class ContributersByIndustry implements Runnable {
 			}
 			System.out.println();
 			for (int t = 0; t < congressCRPs.size(); t++) {
-				System.out.print(chosenPeople.get(t).replace(",", " ") + ",");
+				System.out.print(chosenPeople.get(t).substring(chosenPeople.get(t).indexOf(",") + 2) +
+				" " + chosenPeople.get(t).substring(0, chosenPeople.get(t).indexOf(","))  +
+				",");
 				for (int e = 0; e < 36; e++) {
 					System.out.print(conts[t][e] + ", ");
-/*=======
-				writer.print(chosenPeople.get(t).substring(chosenPeople.get(t).indexOf(",") + 2) +
-						" " + chosenPeople.get(t).substring(0, chosenPeople.get(t).indexOf(","))  +
-						",");
-				for (int e = 0; e < 35; e++) {
-					writer.print(conts[t][e] + ", ");
->>>>>>> origin/master I'm not sure what to delete and what not to delete  */
 				}
 				System.out.println();
 			}
