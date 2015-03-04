@@ -77,8 +77,8 @@ public class ContributersByIndustry implements Runnable {
 				// contributions
 				for (int r = 0; r < allContributions.size(); r++) {
 					if (allContributions.get(r).length() > 4)
-						allContributions.set(r, allContributions.get(r)
-								.substring(1));
+					allContributions.set(r, allContributions.get(r)
+					.substring(1));
 					else {
 						allContributions.remove(r);
 						r--;
@@ -86,10 +86,10 @@ public class ContributersByIndustry implements Runnable {
 				}
 			}
 			/*
-			 * If the arraylist containing all the CRP codes for contribution
-			 * recipients is empty, then it will be added from the contributions
-			 * file
-			 */
+			* If the arraylist containing all the CRP codes for contribution
+			* recipients is empty, then it will be added from the contributions
+			* file
+			*/
 			if (CRPs.isEmpty()) {
 				// Adds CRPs for contributions from file
 				Scanner myScanner2 = new Scanner(contribs);
@@ -109,9 +109,9 @@ public class ContributersByIndustry implements Runnable {
 				myScanner2.close();
 			}
 			/*
-			 * If the arraylist containing the contribution amounts is empty,
-			 * then it will be added from the contribution amounts file
-			 */
+			* If the arraylist containing the contribution amounts is empty,
+			* then it will be added from the contribution amounts file
+			*/
 			if (contribAmountStrings.isEmpty()) {
 				// Adds contribution amounts to arraylist from file
 				Scanner scan3 = new Scanner(contribs2);
@@ -125,7 +125,7 @@ public class ContributersByIndustry implements Runnable {
 				// and adds them to a new arraylist
 				for (int l = 0; l < contribAmountStrings.size(); l++) {
 					contribAmount.add(Integer.parseInt(contribAmountStrings
-							.get(l)));
+					.get(l)));
 				}
 			}
 			//Places the contributions and contribution amounts corresponding to the chosen candidates
@@ -263,9 +263,9 @@ public class ContributersByIndustry implements Runnable {
 		// Adds the CRP codes of the targeted congress people to the ArrayList
 		Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNext()) {
-		congressCRPs.add(scanner.next());
+			congressCRPs.add(scanner.next());
+		}
 		scanner.close();
-
 		//Adds the names of the chosen congresspeople CRPs to an ArrayList
 
 		int i = 0;
@@ -286,15 +286,15 @@ public class ContributersByIndustry implements Runnable {
 		}
 
 		/*
-		 * Adds the contribution amount by industry for the previously selected
-		 * congresspeople to a two-dimensional array by repeatedly calling the
-		 * method defined prior to the main method
-		 */
+		* Adds the contribution amount by industry for the previously selected
+		* congresspeople to a two-dimensional array by repeatedly calling the
+		* method defined prior to the main method
+		*/
 		int[][] conts = new int[congressCRPs.size()][36];
 		for (int h = 0; h < congressCRPs.size(); h++) {
 			for (int p = 0; p < 35; p++) {
 				conts[h][p] = ContributersByIndustry.contributors(congressCRPs
-						.get(h))[p];
+				.get(h))[p];
 			}
 		}
 		System.err.println(industryAndCodes);
@@ -310,19 +310,19 @@ public class ContributersByIndustry implements Runnable {
 			}
 		}
 		// Writes the contribution by industry data to a csv file
-			System.out.print("Sector, ");
+		System.out.print("Sector, ");
+		for (int e = 0; e < 35; e++) {
+			System.out.print(industryAndCodes.get(set.get(e)) + ", ");
+		}
+		System.out.println();
+		for (int t = 0; t < congressCRPs.size(); t++) {
+			System.out.print(chosenPeople.get(t).substring(chosenPeople.get(t).indexOf(",") + 2) +
+			" " + chosenPeople.get(t).substring(0, chosenPeople.get(t).indexOf(","))  +
+			",");
 			for (int e = 0; e < 35; e++) {
-				System.out.print(industryAndCodes.get(set.get(e)) + ", ");
+				System.out.print(conts[t][e] + ", ");
 			}
 			System.out.println();
-			for (int t = 0; t < congressCRPs.size(); t++) {
-				System.out.print(chosenPeople.get(t).substring(chosenPeople.get(t).indexOf(",") + 2) +
-						" " + chosenPeople.get(t).substring(0, chosenPeople.get(t).indexOf(","))  + 
-						",");
-				for (int e = 0; e < 35; e++) {
-					System.out.print(conts[t][e] + ", ");
-				}
-				System.out.println();
-			}
+		}
 	}
 }
