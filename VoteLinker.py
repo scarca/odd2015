@@ -1,11 +1,11 @@
 from os.path import isfile
 from hashlib import md5
+import sys
 from sunlight import congress
 from sunlight.pagination import PagingService
 import json
 
 #File to communicate with other progams... the output file
-CARRYON_FILE = "transfer.txt"
 class VoteLinker:
 	def checkMD5(fd):
 		'''verify MD5 sum of file described by file descriptor fd
@@ -14,7 +14,7 @@ class VoteLinker:
 		fd: the file descriptor
 		Return value: (MD5Sum, Boolean), with the boolean representing whether or not the file matched'''
 
-		print("Checking MD5SUM")
+		print("Checking MD5SUM", file=sys.stderr)
 		realMD5 = open('checksum.md5', 'r').readline()[:-1]
 		checksum = md5()
 		#generating CheckSum
@@ -25,10 +25,10 @@ class VoteLinker:
 		return (checked, realMD5 == checked)
 	def createLeg():
 		'''Recreate the list of legislatures in case something goes wrong, or the checksum doesn't match'''
-		print("Recreating Ledger")
+		print("Recreating Ledger", file=sys.stderr)
 		pag = PagingService(congress)
 		legislators = list(pag.legislators(limit=30000, all_legislators='true'))
-		print("Creating Bits and Bytes")
+		print("Creating Bits and Bytes", file=sys.stderr)
 		string = json.dumps(legislators)
 		f = open('legislatorsList', 'w')
 		f.write(string)
@@ -36,7 +36,7 @@ class VoteLinker:
 		del legislators
 		del string
 		#create MD5Sum
-		print("Recreating MD5Sum")
+		print("Recreating MD5Sum", file=sys.stderr)
 		(checksum, trash) = VoteLinker.checkMD5("legislatorsList")
 		f=open('checksum.md5', 'w')
 		f.write(checksum)
@@ -44,14 +44,14 @@ class VoteLinker:
 	def __init__(self):
 		#do a check to see if the file exists.
 		#A file is the fastest way to do this, since there are a LOT of legislators
-		print("initializing")
+		print("initializing", file=sys.stderr)
 		if not isfile('legislatorsList'):
-			print("creating Legislators because file does not exist")
+			print("creating Legislators because file does not exist", file=sys.stderr)
 			VoteLinker.createLeg()
 		elif not VoteLinker.checkMD5('legislatorsList'):
-			print("creating legislatures because file checksome is wrong")
+			print("creating legislatures because file checksome is wrong", file=sys.stderr)
 			VoteLinker.createLeg()
-		print("Loading Legislators...")
+		print("Loading Legislators...", file=sys.stderr)
 		self.legislators = json.load(open('legislatorsList', 'r'))
 	def getValue(self,category, bid):
 		''' Parse through the existing list to find a politician'''
@@ -61,7 +61,7 @@ class VoteLinker:
 	def determineParty(self, bd):
 		'''Determine party margins for each party'''
 		#returns dem-vote margin and r-vote margin
-		print("Determining Party Margins")
+		print("Determining Party Margins", file=sys.stderr)
 		#literally just a placeholder. This gets the passed version of the bill and the breakdown of what party voted where
 		blob = congress.votes(vote_type="passage", bill_id=bd, fields="breakdown")
 		try:
@@ -98,7 +98,7 @@ class VoteLinker:
 			him= self.getValue("bioguide_id", voter)
 			#catch the weird case where someone isn't there???
 			if him == None:
-				print("Please regenerate the legislator index using the 'r' flag to prevent this from happenging agin. If this persists. please report following ID:",voter)
+				print("Please regenerate the legislator index using the 'r' flag to prevent this from happenging agin. If this persists. please report following ID:",voter, file=sys.stderr)
 				[him] = congress.legislators(all_legislators='true', bioguide_id=voter)
 			try:
 				if him['party'] == 'D':
@@ -113,11 +113,11 @@ class VoteLinker:
 						rVoters[self.getValue('bioguide_id', voter)['crp_id']] = bill_identifier
 				else:
 					pass
-			except TypeError: #Redundancy. Should never actually occur 
-				print("Uh-oh. Something went wrong. Please report the following info.")
+			except TypeError: #Redundancy. Should never actually occur
+				print("Uh-oh. Something went wrong. Please report the following info.", file=sys.stderr)
 				print(him)
-				print(congress.legislators(all_legislators='true', bioguide_id=voter))
-				print(voter)
+				print(congress.legislators(all_legislators='true', bioguide_id=voter), file=sys.stderr)
+				print(voter, file=sys.stderr)
 				break
 		return (dVoters, rVoters)
 if __name__ == "__main__":
@@ -134,22 +134,20 @@ if __name__ == "__main__":
 		try:
 			votes=(a.getVotingRecord(sys.argv[voteNumber+ 1]))
 		except ValueError:
-			print("The Bill You Entered,", sys.argv[voteNumber+1],"Does Not Exist")
+			print("The Bill You Entered,", sys.argv[voteNumber+1],"Does Not Exist", file=sys.stderr)
 			exit(2)
-		f = open(CARRYON_FILE, "w").close()
-		f = open(CARRYON_FILE, "w")
 		for d in votes:
 			for k,v in d.items():
-				f.write(k+"\n")
+				print(k)
 	def regenerate():
 		VoteLinker.createLeg()
 	def printUsage():
-		print("Meanings: \n voting = Look at partisian votes for specified bill. \n regenerate = update list of legislatures from the Sunlight Foundation's database.")
+		print("Meanings: \n voting = Look at partisian votes for specified bill. \n regenerate = update list of legislatures from the Sunlight Foundation's database.", file=sys.stderr)
 		for k,v in opt.items():
 			if len(k) == 1:
-				print("Flag: -"+k, ":", v)
+				print("Flag: -"+k, ":", v, file=sys.stderr)
 			else:
-				print("Option: "+k,":", v)
+				print("Option: "+k,":", v, file=sys.stderr)
 	if len(sys.argv) < 2:
 		printUsage()
 		exit(1)
