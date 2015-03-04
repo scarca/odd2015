@@ -258,18 +258,13 @@ public class ContributersByIndustry implements Runnable {
 			crpsAndNames.put(entry.getKey(), entry.getValue().substring(1));
 		}
 		// User enters the location of the targeted congress people file
-
+		File CRP = new File("src/transfer.txt");
 
 		// Adds the CRP codes of the targeted congress people to the ArrayList
-		try {
-			Scanner scanner = new Scanner(System.in);
-			while (scanner.hasNext()) {
-				congressCRPs.add(scanner.next());
-			}
-			scanner.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNext()) {
+		congressCRPs.add(scanner.next());
+		scanner.close();
 
 		//Adds the names of the chosen congresspeople CRPs to an ArrayList
 
@@ -302,31 +297,32 @@ public class ContributersByIndustry implements Runnable {
 						.get(h))[p];
 			}
 		}
-		System.out.println(industryAndCodes);
+		System.err.println(industryAndCodes);
 		ArrayList<String> set = new ArrayList(industryAndCodes.keySet());
 		Collections.sort(set);
-		System.out.println(set);
+		System.err.println(set);
 		// Prints out contribution amounts by industry for each of the selected
 		// congresspeople
+		for (int t = 0; t < congressCRPs.size(); t++) {
+			for (int e = 0; e < 35; e++) {
+				System.err.print(industryAndCodes.get(set.get(e)) + ": ");
+				System.err.println(conts[t][e]);
+			}
+		}
 		// Writes the contribution by industry data to a csv file
-		try {
 			System.out.print("Sector, ");
-			for (int e = 0; e < 36; e++) {
+			for (int e = 0; e < 35; e++) {
 				System.out.print(industryAndCodes.get(set.get(e)) + ", ");
 			}
 			System.out.println();
 			for (int t = 0; t < congressCRPs.size(); t++) {
 				System.out.print(chosenPeople.get(t).substring(chosenPeople.get(t).indexOf(",") + 2) +
-				" " + chosenPeople.get(t).substring(0, chosenPeople.get(t).indexOf(","))  +
-				",");
-				for (int e = 0; e < 36; e++) {
+						" " + chosenPeople.get(t).substring(0, chosenPeople.get(t).indexOf(","))  + 
+						",");
+				for (int e = 0; e < 35; e++) {
 					System.out.print(conts[t][e] + ", ");
 				}
 				System.out.println();
 			}
-			System.out.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }
