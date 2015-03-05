@@ -5,6 +5,8 @@ from sunlight import congress
 from sunlight.pagination import PagingService
 import json
 
+if sys.version_info < (3,):
+	from __future__ import print_function 
 #File to communicate with other progams... the output file
 class VoteLinker:
 	def checkMD5(fd):
