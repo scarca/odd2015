@@ -1,8 +1,10 @@
 extends layout
-
 block content
-    table
-        for row in arr
-            tr
-            for dat in row
-                td= dat
+    script(src="/socket.io/socket.io.js")
+    script(src="/javascripts/tablegen.js")
+    .table
+        table
+            for row in arr
+                tr
+                for dat in row
+                    td= dat
