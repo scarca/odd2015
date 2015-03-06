@@ -2,8 +2,7 @@ var express = require('express');
 var https = require('https');
 var u = require('url')
 var csv = require('csv')
-var reader = require('../reader')
-var handler = require('../handler')
+var handler = require('../bin/handler')
 var router = express.Router();
 
 /* GET home page. */
@@ -12,12 +11,12 @@ router.get('/', function(req, res, next) {
 });
 router.get('/bill_id_search', function(req, res, next){
     var bill = u.parse(req.url, true).query.bill
-    handler.startPy([['VoteLinker.py', '-v', bill]], function(code, data){
+    handler.startPy([['VoteLinker.py', '-v', bill]],console.log, function(code, data){
         if(code == 2){
             arr = [['Error: ', "Bill does not exist"]]
             res.render('vlink')
         }else{
-            handler.startJava([['ContributersByIndustry'], data],function(code, output){
+            handler.startJava([['ContributersByIndustry'], data],console.log, function(code, output){
                 csv.parse(output, {delimiter: ","}, function(err, done){
                     res.render('vlink', {arr: done} )
                 })
@@ -52,5 +51,8 @@ router.get('/bill_kw_search', function(req, res, next){
         }
     });
 
+})
+router.get('/search', function(req, res, next){
+    res.render("search")
 })
 module.exports = router;
