@@ -2,8 +2,7 @@ var express = require('express');
 var https = require('https');
 var u = require('url')
 var csv = require('csv')
-var reader = require('../reader')
-var handler = require('../handler')
+var handler = require('../bin/handler')
 var router = express.Router();
 
 /* GET home page. */
