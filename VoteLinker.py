@@ -64,7 +64,8 @@ class VoteLinker:
 		#returns dem-vote margin and r-vote margin
 		print("Determining Party Margins", file=sys.stderr)
 		#literally just a placeholder. This gets the passed version of the bill and the breakdown of what party voted where
-		blob = congress.votes(vote_type="passage", bill_id=bd, fields="breakdown")
+		blob = congress.votes(result="Passed", bill_id=bd, fields="breakdown")
+		print("blob is: length ", len(blob), file=sys.stderr)
 		try:
 			blob[0]['breakdown']['party']['R']['Yea'] += blob[1]['breakdown']['party']['R']['Yea']
 			blob[0]['breakdown']['party']['R']['Nay'] += blob[1]['breakdown']['party']['R']['Nay']
