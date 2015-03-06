@@ -280,10 +280,6 @@ public class ContributersByIndustry implements Runnable {
 			}
 			i++;
 		}
-		// Prints out the names of the chosen congresspeople
-		for (String z : chosenPeople) {
-			System.err.println(z);
-		}
 
 		/*
 		* Adds the contribution amount by industry for the previously selected
@@ -297,18 +293,10 @@ public class ContributersByIndustry implements Runnable {
 				.get(h))[p];
 			}
 		}
-		System.err.println(industryAndCodes);
 		ArrayList<String> set = new ArrayList(industryAndCodes.keySet());
 		Collections.sort(set);
-		System.err.println(set);
 		// Prints out contribution amounts by industry for each of the selected
 		// congresspeople
-		for (int t = 0; t < congressCRPs.size(); t++) {
-			for (int e = 0; e < 35; e++) {
-				System.err.print(industryAndCodes.get(set.get(e)) + ": ");
-				System.err.println(conts[t][e]);
-			}
-		}
 		// Writes the contribution by industry data to a csv file
 		System.out.print("Sector, ");
 		for (int e = 0; e < 35; e++) {
