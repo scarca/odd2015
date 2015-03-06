@@ -5,7 +5,11 @@ window.onload = function(){
     var datfield = document.getElementById("data")
     var sub = function(){
         var data = ifield.value
-        socket.emit('query', {q: data})
+        if(data.match(/(hr|hres|sr|hjres|sjres|hconres|sconres)\d*\-\d{2,}/g) === null){
+            socket.emit('search', {s: data})
+        } else {
+            socket.emit('query', {q: data})
+        }
         datfield.innerHTML = ""
     }
     socket.on("update", function(message){
