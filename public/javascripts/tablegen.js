@@ -3,6 +3,11 @@ window.onload = function(){
     var sendButton = document.getElementById("send")
     var ifield = document.getElementById("field")
     var datfield = document.getElementById("data")
+    var sub = function(){
+        var data = ifield.value
+        socket.emit('query', {q: data})
+        datfield.innerHTML = ""
+    }
     socket.on("update", function(message){
         var m = document.createTextNode(message['status']);
         var tr = document.createElement('tr');
@@ -28,8 +33,11 @@ window.onload = function(){
         }
     })
     sendButton.onclick = function(){
-        var data = ifield.value
-        socket.emit('query', {q: data})
-        datfield.innerHTML = ""
+        sub()
+    }
+    ifield.onkeypress = function(e){
+        if(e.which == 13){
+            sub()
+        }
     }
 }

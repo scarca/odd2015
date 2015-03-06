@@ -1,10 +1,10 @@
 extends layout
 block content
     #form
-        form(action="")
+        form(action="javascript:void(0)", method="get")
             .textInput
-                input#field()
-            input#send(type='button', value='send')
+                input#field(type="text", autocomplete="off")
+            input#send(type='button', value='Search')
     h1 STATUS
     table#data
     
