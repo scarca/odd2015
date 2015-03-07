@@ -7,7 +7,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Campaign Clarity', Message:'hi' });
+  res.render('index', { title: 'Campaign Clarity',page:'Home' });
 });
 router.get('/bill_id_search', function(req, res, next){
     var bill = u.parse(req.url, true).query.bill
@@ -18,7 +18,7 @@ router.get('/bill_id_search', function(req, res, next){
         }else{
             handler.startJava([['ContributersByIndustry'], data],console.log, function(code, output){
                 csv.parse(output, {delimiter: ","}, function(err, done){
-                    res.render('vlink', {arr: done} )
+                    res.render('vlink', {page: "ID Search", arr: done} )
                 })
             })
         }
@@ -53,6 +53,6 @@ router.get('/bill_kw_search', function(req, res, next){
 
 })
 router.get('/search', function(req, res, next){
-    res.render("search")
+    res.render("search", {page: "Bill Search"})
 })
 module.exports = router;
