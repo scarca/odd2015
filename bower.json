@@ -5,6 +5,10 @@
   "authors": [
     "Raj Shrimali <rajshrimali@gmail.com>"
   ],
+  "main": "./bin/www",
+  "moduleType": [
+    "node"
+  ],
   "license": "MIT",
   "private": true,
   "ignore": [
@@ -13,5 +17,8 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~0.5.5"
+  }
 }

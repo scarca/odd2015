@@ -22,7 +22,7 @@ Usage
   4. run `npm install` to run the required packages
   5. run `javac ContributersByIndustry.java` to compile the java code
   6. run `npm start` to start the web wrapper 
-  7. navigate to `localhost:3000` in a web browser to get started! 
+  7. navigate to `localhost:3000/search` in a web browser to get started! You can enter either the keyword or a bill-id and it will search! 
 
   
 
