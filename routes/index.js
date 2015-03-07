@@ -9,6 +9,9 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Campaign Clarity',page:'Home' });
 });
+router.get("/about", function(req, res, next){
+    res.render('about', {page: 'About Us'})
+})
 router.get('/bill_id_search', function(req, res, next){
     var bill = u.parse(req.url, true).query.bill
     handler.startPy([['VoteLinker.py', '-v', bill]],console.log, function(code, data){
