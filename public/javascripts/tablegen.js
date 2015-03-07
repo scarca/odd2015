@@ -28,10 +28,18 @@ window.onload = function(){
         for(row in data['arr']){
             var tr = document.createElement('tr');
             for(col in data['arr'][row]){
-                var text = document.createTextNode(data['arr'][row][col]);
-                var tc = document.createElement("td");
-                tc.appendChild(text)
-                tr.appendChild(tc)
+                if(col == 0 && row == 0){
+                    a = document.createTextNode("");
+                    tc = document.createElement("td");
+                    tc.appendChild(a)
+                    tr.appendChild(tc);
+                }else{
+                    var t = data['arr'][row][col];
+                    var text = document.createTextNode(t.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    var tc = document.createElement("td");
+                    tc.appendChild(text)
+                    tr.appendChild(tc)
+                }
             }
             datfield.appendChild(tr)
         }

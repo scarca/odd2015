@@ -4,3 +4,5 @@
 node_modules/*
 node_modules
 __init__.py
+bower_components/* 
+bower_components

@@ -15,11 +15,18 @@ public class ContributersByIndustry implements Runnable {
 	private static List<String> chosenPeople = new ArrayList<String>();
 	private static HashMap<String, String> industryAndCodes = new HashMap<>();
 	private static HashMap<String, String> crpsAndNames = new HashMap<>();
-
+	public static void printm(String mesg){
+		System.err.println(mesg);
+	}
+	public static void printerr(Exception e){
+		System.err.print("[ERROR] ");
+		e.printStackTrace();
+	}
 	public void run() {
 		// User enters the location of the sector codes file
 		File sectorCodes = new File("src/Sector_Codes.csv");
 		// Adds sector codes and industries to their respective ArrayLists
+		printm("Parsing data");
 		try {
 			Scanner scan = new Scanner(sectorCodes);
 			Scanner scan2 = new Scanner(sectorCodes);
@@ -41,7 +48,7 @@ public class ContributersByIndustry implements Runnable {
 			scan.close();
 			scan2.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			printerr(e);
 		}
 	}
 
@@ -54,7 +61,6 @@ public class ContributersByIndustry implements Runnable {
 		// Location of file containing all contribution amounts
 		File contribs2 = new File("src/ContributionsAmounts.csv");
 		try {
-
 			if (allContributions.isEmpty()) {
 				// Adds contributions from file to arraylist
 				Scanner myScanner = new Scanner(contribs);
@@ -140,7 +146,7 @@ public class ContributersByIndustry implements Runnable {
 			}
 
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			printerr(e);
 		}
 		//Adds up the total contributions in dollars by sector to the chosen candidates
 		int[] conts = new int[35];
@@ -249,7 +255,7 @@ public class ContributersByIndustry implements Runnable {
 			scanner.close();
 			scanner2.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			printerr(e);
 		}
 		// Removes excess spaces and commas from each of the ArrayList elements
 		// in the name ArrayList

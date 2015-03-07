@@ -6,9 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
-
-.table{
-    color: #00B7FF;
+.dataTable{
+    background-color: green;
 }
 .textInput{
     width:350px;
