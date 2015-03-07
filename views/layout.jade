@@ -9,18 +9,19 @@ html(lang="en")
         link(rel='stylesheet', href='bootstrap-material-design/dist/css/material-wfont.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         script(src="/socket.io/socket.io.js")
-
+        
     body
         nav.navbar.navbar-default
             .container-fluid
                 .navbar-header
                     .navbar-brand Campaign Clarity
+                h3.text-center= page
         .container-fluid
             .col-xs-3.sidebar
-                    ul.nav.nav-stacked
-                        li 
+                    ul.nav.nav-stacked.list-group
+                        li.list-group-item 
                             a.btn.btn-primary.btn-block.btn-raised(role="button", href="/") Home
-                        li 
+                        li.list-group-item 
                             a.btn.btn-primary.btn-block.btn-raised(role="button", href="/search") Search
             #content.col-xs-9.img-rounded
                 block content

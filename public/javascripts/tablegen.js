@@ -5,6 +5,7 @@ window.onload = function(){
     var datfield = document.getElementById("data")
     var statfield = document.getElementById("status")
     var sub = function(){
+        $("#status").removeClass("invisible")
         var data = ifield.value
         if(data.match(/(hr|hres|sr|hjres|sjres|hconres|sconres)\d*\-\d{2,}/g) === null){
             socket.emit('search', {s: data})
@@ -13,18 +14,17 @@ window.onload = function(){
         }
         datfield.innerHTML = ""
     }
+    var status = 0;
     socket.on("update", function(message){
-        var m = document.createTextNode(message['status']);
-        var tr = document.createElement('tr');
-        var tc = document.createElement("td");
-        tc.appendChild(m);
-        tr.appendChild(tc);
-        statfield.appendChild(tr);
+        status+=10;
+        $("#statusbar").css('width',status.toString()+"%").attr('aria-valuenow',status.toString())
     })
     socket.on("err", function(errm){
         datfield.innerHTML = errm['err'];
     })
     socket.on("done", function(data){
+        $("#statusbar").css('width',"100%").attr('aria-valuenow',"100")
+        $("#stbwrp").removeClass("active progress-striped")
         datfield.innerHTML = ""
         var content = null
         for(row in data['arr']){
@@ -38,7 +38,6 @@ window.onload = function(){
                 if(col == 0 && row == 0){
                     a = document.createTextNode("");
                     tc = document.createElement("td");
-                    tc.appendChild(a)
                     tr.appendChild(tc);
                 }else{
                     var t = data['arr'][row][col];
