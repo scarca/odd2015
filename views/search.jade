@@ -1,17 +1,18 @@
 extends layout
 block content
     script(src="javascripts/tablegen.js")
-    form(action="javascript:void(0)", method="get")
-        .form
-            label.sr-only(for="Search Query") Search Term
-            .input-group
-                .input-group-addon Search: 
-                input.form-control#inputfield(type="text",placeholder="e.x. hr3-114, Keystone XL" autocomplete="off")
-            input#send.btn.btn-default.btn-success(type='button', value='Go')
-    .col-xs-3
-        h3 Status
-        table#status
-    .col-xs-9
-        .table-responsive
-            table.table.table-bordered#data
+    .container-fluid
+        form(action="javascript:void(0)", method="get")
+            .form
+                label.sr-only(for="Search Query") Search Term
+                .input-group
+                    .input-group-addon Search: 
+                    input.form-control#inputfield(type="text",placeholder="e.x. hr3-114, Keystone XL" autocomplete="off")
+                input#send.btn.btn-default.btn-success(type='button', value='Go')
+        .col-xs-3
+            h3 Status
+            table#status
+        .col-xs-9
+            .table-responsive
+                table.table.table-bordered#data
     

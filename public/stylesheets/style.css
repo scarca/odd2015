@@ -2,6 +2,7 @@ body {
   padding: 50px;
   font: 14px Helvetica,"Lucida Grande", Arial, sans-serif;
 }
-.col-xs-9{
+#content{
     background-color: white;
+    .border-radius: 5px;
 }
