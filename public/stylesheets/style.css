@@ -1,15 +1,7 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Helvetica,"Lucida Grande", Arial, sans-serif;
 }
-
-a {
-  color: #00B7FF;
-}
-
-.table{
-    color: #00B7FF;
-}
-.textInput{
-    width:350px;
+.col-xs-9{
+    background-color: white;
 }

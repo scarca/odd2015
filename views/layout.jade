@@ -1,9 +1,28 @@
 doctype html
-html
+html(lang="en")
     head
-        title= title
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title Campaign Clarity
+        link(rel='stylesheet', href='bootstrap/dist/css/bootstrap.min.css')
+        //- theme
+        link(rel='stylesheet', href='bootstrap-material-design/dist/css/material-wfont.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         script(src="/socket.io/socket.io.js")
-        script(src="javascripts/tablegen.js")
+
     body
-        block content
+        .navbar.navbar-default
+            .navbar-header
+                .navbar-brand Campaign Clarity
+        .container-fluid
+            .col-xs-3.sidebar
+                    ul.nav.nav-stacked
+                        li 
+                            a.btn.btn-primary.btn-block.btn-raised(role="button", href="/") Index
+                        li 
+                            a.btn.btn-primary.btn-block.btn-raised(role="button", href="/search") Search
+            .col-xs-9
+                block content
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+        script(src="bootstrap/dist/js/bootstrap.min.js")
+        script(src="bootstrap-material-design/dist/js/material.min.js")

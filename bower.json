@@ -1,0 +1,17 @@
+{
+  "name": "odd2015",
+  "version": "0.5.0",
+  "homepage": "https://github.com/scarca/odd2015",
+  "authors": [
+    "Raj Shrimali <rajshrimali@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
