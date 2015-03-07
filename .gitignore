@@ -1,11 +1,7 @@
 *.class
 *.log
-transfer.txt
-CongresspeopleContribs.csv
 .DS_Store
-
-src/CongresspeopleContribs.csv
-
-transfer.txt
-
-t.txt
+node_modules/* 
+node_modules
+bower_components 
+bower_components/* 
