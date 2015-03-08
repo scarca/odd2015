@@ -9,10 +9,12 @@ module.exports = function(server){
 
     io.on('connection', function(socket){
         var emitStatus = function(data){
+	    console.log(data)
             socket.emit("update", {status: data});
         }
         var handle = function(bill){
             handler.startPy([[root + "/VoteLinker.py", "-v", bill]],emitStatus, function(code, data){
+		console.log("Started Python")
                 if(code == 2){
                     var datum = {err: "Bill Does Not Exist"}
                     socket.emit("err", datum)
@@ -39,6 +41,7 @@ module.exports = function(server){
                 res.on('data', function(data){
                     var j = JSON.parse(data)
                     if(j['count'] == 0){
+			console.log("No Bill Found!");
                         var datum = {'err': "No Bill Found!"}
                         socket.emit('err', datum)
                     }
