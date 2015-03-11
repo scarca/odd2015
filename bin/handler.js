@@ -4,7 +4,7 @@ var handler = new Object()
 handler.startPy = function(commands,errfunc, callback){
     //Command[0] contains program parameters,
     //Command[1] contains input data
-    var py = cp.spawn("python", commands[0])
+    var py = cp.spawn("python3", commands[0])
     var ostring = ""
     py.stdout.on('data', function(data){
         ostring += data
