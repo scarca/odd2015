@@ -37,7 +37,7 @@ module.exports = function(server){
         socket.on('search', function(kw){
             console.log("KW:",kw['s'])
             kw['s'].replace(" ", "%20");
-            https.get('https://congress.api.sunlightfoundation.com/bills/search?query='+kw['s']+'&apikey=a07d09d6d82b4d9985b29f79c123aaec&fields=bill_id&house_passage_result=pass', function(res){
+            https.get('https://congress.api.sunlightfoundation.com/bills/search?query='+kw['s']+'&apikey=a07d09d6d82b4d9985b29f79c123aaec&fields=bill_id&', function(res){
                 res.on('data', function(data){
                     var j = JSON.parse(data)
                     if(j['count'] == 0){
