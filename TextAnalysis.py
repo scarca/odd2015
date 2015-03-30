@@ -12,23 +12,44 @@ def wordSplitter(sentence):
 	split = TextBlob(sentence)
 	print split.words.singularize()
 	return split
-
+	
+	
+"""
+deletion is the string to be deleted
+list is the list of strings
+this function will get rid of unnecessary strings
+"""
+def wordDeleter(deletion, list):
+	while deletion in list:
+		list.remove(deletion)
+	return list
+	
 """
 This function will take the wordlist and extract content-heavy words
 The parameter passes through a TextBlob
-
+Will transfer into a normal "list"
 """
-def contentExtractor(wordlist):
+def contentExtractor(TextBlobMe):
 	result = []
+	itercount = sum(TextBlobMe.word_counts.itervalues())
+	for i in range(0, itercount):
+		result.append(TextBlobMe.words[i])
+	
+	wordDeleter("the", result)
+	wordDeleter("an", result)
+	wordDeleter("a", result)
+	wordDeleter("I", result)
+	wordDeleter("you", result)
 	
 	
 
 wordSplitter("I am a testers. Please work with me")
 
-#contentExtractor(wordSplitter("ABC, I am 123"))
 
-wiki = TextBlob("I am me, I am you, you are me")
-print wiki.tags
-print wiki.words
-print wiki.word_counts
+
+wiki = TextBlob("I am the, I am the, you are the")
+#print wiki.tags
+#print wiki.words
+#print wiki.word_counts
 print sum(wiki.word_counts.itervalues())
+print contentExtractor(wiki)
