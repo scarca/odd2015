@@ -15,13 +15,13 @@ This project is also on [Hackpad](https://opendatadaydc.hackpad.com/Correlation-
 Usage
 -----
   1. `git clone` the project 
-  2. If you do not have python3, install it :P 
+  2. If you do not have python3, install it
   3. `cd` into the directory 
   4. run `npm install` to run the required packages
   5. run `javac ContributersByIndustry.java` to compile the java code
   6. run `npm start` to start the web wrapper 
   7. navigate to `localhost:3000/search` in a web browser to get started! You can enter either the keyword or a bill-id and it will search! 
-  8. If you prefer to use a command line, you can do so by running `python3 VoteLinker.py -v [bill-id] | java ContributersByIndustry
+  8. If you prefer to use a command line, you can do so by running `python3 VoteLinker.py -v [bill-id] | java ContributersByIndustry`
 
 
   
