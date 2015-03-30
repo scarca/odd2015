@@ -38,16 +38,21 @@ def contentExtractor(TextBlobMe):
 	wordDeleter("the", result)
 	wordDeleter("an", result)
 	wordDeleter("a", result)
-	wordDeleter("I", result)
-	wordDeleter("you", result)
+	wordDeleter("in", result)
+	wordDeleter("of", result)
+	wordDeleter("on", result)
+	wordDeleter("by", result)
 	
+	return result
 	
 
 wordSplitter("I am a testers. Please work with me")
 
+wiki = TextBlob("Authorizes TransCanada Keystone Pipeline, L.P. to construct, connect, operate, \
+and maintain the pipeline and cross-border facilities specified in an application filled \
+by TransCanada Corporation to the Department of State on May 4, 2012.")
 
-
-wiki = TextBlob("I am the, I am the, you are the")
+#wiki = TextBlob("I am the, I am the, you are the")
 #print wiki.tags
 #print wiki.words
 #print wiki.word_counts
