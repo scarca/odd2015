@@ -81,7 +81,7 @@ class VoteLinker:
 		#Make sure the bill exists
 		blob = congress.votes(vote_type="passage", bill_id=bill_identifier, fields="voter_ids")
 		if blob == None:
-			raise ValueError("Bill Does Not Exist")
+			raise ValueError("Bill Does Not Exist or Never went for Passage Vote")
 			return ({},{})
 		#Determine which party went which way
 		(dMargin, rMargin)=self.determineParty(bill_identifier)
