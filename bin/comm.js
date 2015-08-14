@@ -14,6 +14,11 @@ module.exports = function(server){
             socket.emit("update", {status: data});
         }
         var handle = function(bill){
+			bill = bill.replace(" ", ""); 
+			bill = bill.replace("\n", ""); 
+			bill = bill.replace("\t", ""); 
+			bill = bill.replace("\r", ""); 
+			//VERY VERY DANGEROUS. FIND A WAY TO SANITIZE INPUT TODO
             handler.startPy([[root + "/VoteLinker.py", "-v", bill]],emitStatus, function(code, data){
 			console.log("Started Python")
                 if(code == 2){
