@@ -38,8 +38,18 @@ module.exports = function(server){
             console.log("query:", data['q']);
             var d = data['q']
             handle(d);
+			//Find the short title for user convinience 
+			//
+			//
+		    https.get('https://congress.api.sunlightfoundation.com/bills/search?bill_id='+d+'&apikey=a07d09d6d82b4d9985b29f79c123aaec&fields=short_title', function(res){
+			res.pipe(bl(function(err, data){ 
+				var j = JSON.parse(data);
+				var datum = j['results'][0]['short_title']; 
+				var msg = {'short_title': datum}; 
+				socket.emit('init', msg); 
+			}))
         })
-
+		})
         socket.on('search', function(kw){
             console.log("KW:",kw['s'])
             kw['s'].replace(" ", "%20");

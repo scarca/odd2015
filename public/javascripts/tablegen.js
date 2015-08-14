@@ -1,10 +1,13 @@
 window.onload = function(){
+    var status = 0;
     var socket = io()
     var sendButton = document.getElementById("send")
     var ifield = document.getElementById("inputfield")
     var datfield = document.getElementById("data")
     var statfield = document.getElementById("status")
+	var infofield = document.getElementById("infosec")
     var sub = function(){
+		status = 0; 
         $("#status").removeClass("invisible")
         var data = ifield.value
         if(data.match(/(hr|hres|sr|hjres|sjres|hconres|sconres)\d*\-\d{2,}/g) === null){
@@ -14,13 +17,17 @@ window.onload = function(){
         }
         datfield.innerHTML = ""
     }
-    var status = 0;
+	socket.on("init", function(name){
+		textNode = document.createTextNode("Crunching Data on " + name['short_title']); 
+		infofield.appendChild(textNode); 
+//		statfield.innerHTML="Status: Crunching Data on " + name['short_title']; 
+	})
     socket.on("update", function(message){
         status+=10;
         $("#statusbar").css('width',status.toString()+"%").attr('aria-valuenow',status.toString())
     })
     socket.on("err", function(errm){
-        datfield.innerHTML = errm['err'];
+        infofield.innerHTML = errm['err'];
     })
     socket.on("done", function(data){
         $("#statusbar").css('width',"100%").attr('aria-valuenow',"100")
