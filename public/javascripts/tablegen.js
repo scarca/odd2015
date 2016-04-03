@@ -10,8 +10,9 @@ window.onload = function(){
 		status = 0;
         $("#status").removeClass("invisible")
         var data = ifield.value
-        if(data.match(/(hr|hres|sr|hjres|sjres|hconres|sconres|s)\d*\-\d{2,}/g) === null){
-            socket.emit('search', {s: data})
+        if(data.trim().match(/(hr|hres|sr|hjres|sjres|hconres|sconres|s)\d*\-\d{2,}/g) === null){
+			//sanitize by removing whitespace
+            socket.emit('search', {s: data.trim()})
         } else {
             socket.emit('query', {q: data})
         }

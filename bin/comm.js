@@ -14,6 +14,7 @@ module.exports = function(server){
             socket.emit("update", {status: data});
         }
         var handle = function(bill){
+			bill = bill.trim(); 
 			bill = bill.replace(" ", ""); 
 			bill = bill.replace("\n", ""); 
 			bill = bill.replace("\t", ""); 
@@ -44,7 +45,13 @@ module.exports = function(server){
 		    https.get('https://congress.api.sunlightfoundation.com/bills/search?bill_id='+d+'&apikey=a07d09d6d82b4d9985b29f79c123aaec&fields=short_title', function(res){
 			res.pipe(bl(function(err, data){ 
 				var j = JSON.parse(data);
-				var datum = j['results'][0]['short_title']; 
+				var datum = null; 
+				try{ 
+					datum = j['results'][0]['short_title']; 
+				} catch(err) { 
+					datum = "Something went wrong. Make sure there is NO whitespace in your query (including no trailing space)" ; 
+					console.log(data); 
+				} 
 				var msg = {'short_title': datum}; 
 				socket.emit('init', msg); 
 			}))
