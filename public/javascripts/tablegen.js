@@ -7,10 +7,10 @@ window.onload = function(){
     var statfield = document.getElementById("status")
 	var infofield = document.getElementById("infosec")
     var sub = function(){
-		status = 0; 
+		status = 0;
         $("#status").removeClass("invisible")
         var data = ifield.value
-        if(data.match(/(hr|hres|sr|hjres|sjres|hconres|sconres)\d*\-\d{2,}/g) === null){
+        if(data.match(/(hr|hres|sr|hjres|sjres|hconres|sconres|s)\d*\-\d{2,}/g) === null){
             socket.emit('search', {s: data})
         } else {
             socket.emit('query', {q: data})
@@ -18,9 +18,9 @@ window.onload = function(){
         datfield.innerHTML = ""
     }
 	socket.on("init", function(name){
-		textNode = document.createTextNode("Crunching Data on " + name['short_title']); 
-		infofield.appendChild(textNode); 
-//		statfield.innerHTML="Status: Crunching Data on " + name['short_title']; 
+		textNode = document.createTextNode("Crunching Data on " + name['short_title']);
+		infofield.appendChild(textNode);
+//		statfield.innerHTML="Status: Crunching Data on " + name['short_title'];
 	})
     socket.on("update", function(message){
         status+=10;
