@@ -1,4 +1,4 @@
-The Glass Ceiling Project
+Campaign Clarity 
 ========
 We try to bring transparency to our political process by shedding light on what industrys contribute to which politicians, and trying to relate that to a change in a politicians vote. Right now, a "strange" political vote is a non-partisan vote, but we will try to implement an AI to create a "voting profile" of each politician, helping us better identify how they vote and if an industry contribution influences their vote. 
 
