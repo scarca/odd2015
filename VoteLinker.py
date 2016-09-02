@@ -163,7 +163,7 @@ if __name__ == "__main__":
 			else:
 				printUsage()
 	else:
-		for command in range(1,sys.argv):
+		for command in range(1,len(sys.argv)):
 			if opt[sys.argv[command]] == "regenerate":
 				regenerate()
 			elif opt[sys.argv[command]] == "voting":
